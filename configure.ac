@@ -16,6 +16,10 @@ AC_PROG_MAKE_SET
 
 # Checks for typedefs, structures, and compiler characteristics.
 
+if test "x$GCC" = "xyes"; then
+  CFLAGS="$CFLAGS -Wall"
+fi
+
 # Checks for library functions.
 
 AC_CONFIG_FILES([Makefile

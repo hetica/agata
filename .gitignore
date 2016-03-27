@@ -40,10 +40,13 @@
 # http://www.gnu.org/software/automake
 #
 Makefile.in
+Makefile
 #
 # # http://www.gnu.org/software/autoconf
 #
-autom4te.cache
+autom4te.cache/
+.deps/
+/config.*
 autoscan.log
 autoscan-*.log
 aclocal.m4
@@ -55,4 +58,3 @@ depcomp
 install-sh
 missing
 stamp-h1
-
