@@ -7,8 +7,8 @@
 # include "fastxfile.h"
 # include "seqfastx.h"
 
-// Variable globale pour afficher les messages de dev
-bool debug = false ;
+
+bool debug = false ;						// Variable globale pour afficher les messages de dev
 
 // Namespaces:
 using namespace std;
@@ -31,6 +31,9 @@ int main(int argc, char** argv)
 		if (debug) cout << "filename: " << f.getFileName() << endl ;
 		if (debug) cout << "file Type: " << f.getFileType() << endl ;
 	}
+
+	// if (debug) cout << "Nombre de séquences: " <<  SeqFastX::getNbSeq() << endl ;
+	// if (debug) cout << "Nombre de séquences sans nom: " <<  SeqFastX::getNbSeqNoName() << endl ;
 
     if (debug) cout << "EOF" << endl ;
     exit(EXIT_SUCCESS);

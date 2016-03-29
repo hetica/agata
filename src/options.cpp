@@ -26,13 +26,13 @@ void options(int argc, char** argv, string& refseqfile, string& samfile, vector<
 	int c;
     int digit_optind = 0;
     string helpmesg = "Usage : agata [-d|--debug] -i SEQUENCE -o OUTPUT.SAM FILE1 FILE2 FILEn\n"
-                        "       agata -h|--help\n"
-                        "Mapper des fichiers fasta ou fastq sur une séquence de référence SEQUENCE et produire un fichier OUTPUT.SAM\n\n"
-                        "       -d          --debug             display all debug messages\n"
-                        "       -i SEQUENCE                     sequence's reference\n"
-                        "       -o OUTPUT.SAM                   output file, in SAM format\n"
-                        "       -h          --help              show help\n"
-                        "       FILE1 FILE2 FILEn               reads, in FASTA or FASTQ format\n" ;
+                        "		agata -h|--help\n"
+                        "\n Map fasta/fastq files on reference sequence and output a SAM file\n\n"
+                        "		-d	--debug						display all debug messages\n"
+                        "		-i SEQUENCE						sequence's reference\n"
+                        "		-o OUTPUT.SAM					output file, in SAM format\n"
+                        "		-h	--help						show help\n"
+                        "		FILE1 FILE2 FILEn				reads, in FASTA or FASTQ format\n" ;
     static struct option long_options[] = {
 		{"help",  no_argument,       0,  'h' },
 		{"debug", no_argument,       0,  'd' }

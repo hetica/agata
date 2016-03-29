@@ -2,34 +2,37 @@
 
 using namespace std ;
 
+int SeqFastX::nbSeq = 0 ; 							// initialise nombre de séquences 0
+int SeqFastX::nbSeqNoName = 0 ; 					// initialise nombre de séquences vides
+
 // Constructeurs
-SeqFastX::SeqFastX() : m_nomfic() {}
-
-SeqFastX::SeqFastX(std::string nomfic) : m_nomfic(nomfic) {}
-
-// Méthodes
-string SeqFastX::getNomFic()
-    {
-        return m_nomfic ;
-    }
-
-void SeqFastX::loadFile()
+SeqFastX::SeqFastX() : m_seqName()
 {
-    //Déclaration d'un flux permettant de lire dans un fichier
-    string const file(m_nomfic);
-    ifstream monFlux(file.c_str());
-
-    if(monFlux)
-    {
-        cout << "mon flux" << endl ;
-        string ligne ;
-
-    }
-    else
-    {
-        cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
-    }
-
+	nbSeq++ ;
 }
 
+SeqFastX::SeqFastX(std::string seqName) : m_seqName(seqName) {
+	nbSeq++ ;
+}
 
+SeqFastX::SeqFastX(size_t nbSeq, string seqName) : numSeq(nbSeq), m_seqName(seqName) {
+	nbSeq++ ;										// compteur de reads
+}
+
+//SeqFastX::~SeqFastX() {}							// Destructeur
+
+// Méthodes
+string SeqFastX::getSeqName()
+    {
+        return m_seqName ;
+    }
+
+int SeqFastX::getNbSeq()
+{
+	return nbSeq ;
+}
+
+int SeqFastX::getNbSeqNoName()
+{
+	return nbSeqNoName ;
+}
