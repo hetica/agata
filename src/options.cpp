@@ -2,8 +2,8 @@
 
 using namespace std ;
 
-
-bool is_readable( const string &file )            //indique si un fichier est lisible (et donc si il existe)
+//indique si un fichier est lisible (et donc si il existe)
+bool is_readable( const string &file )            
 {
   ifstream fichier(file.c_str());
   return !fichier.fail();
@@ -97,13 +97,13 @@ void options(int argc, char** argv, string& refseqfile, string& samfile, vector<
             cout << endl ;
         }
 
-        // vérifier si le fichier de séquence existe
+        // vérifier si le fichier de référence existe
         if (! is_readable(refseqfile)) {
             cout << "Error: file " << refseqfile << " not found" << endl ;
             exit(2) ;
         }
 
-        // vérifier si les fichiers FASTx existent
+        // vérifier si les fichiers FASTx existent et sont valides
         for (int i=0; i<fastxfile.size(); ++i ) {
             if (! is_readable(fastxfile[i])){
                 cout << "Error: file " << fastxfile[i] << " not found" << endl ;
