@@ -3,7 +3,6 @@
 using namespace std ;
 
 int SeqFastX::nbSeq = 0 ; 							// initialise nombre de séquences 0
-int SeqFastX::nbSeqNoName = 0 ; 					// initialise nombre de séquences vides
 
 // Constructeurs
 SeqFastX::SeqFastX() : m_seqName(), encodage(NULL) {
@@ -15,7 +14,7 @@ SeqFastX::SeqFastX(std::string seqName) : m_seqName(seqName), encodage(NULL) {
 }
 
 SeqFastX::SeqFastX(string seqName, const char * seq) :
-				numSeq(nbSeq),m_seqName(seqName), m_longSeq(0), encodage(NULL) {
+				numSeq(nbSeq), m_seqName(seqName), m_longSeq(0), encodage(NULL) {
 	nbSeq++ ;										// compteur de reads
 	/* en entrée :
 		- l'intitulé de la séquence
@@ -26,11 +25,6 @@ SeqFastX::SeqFastX(string seqName, const char * seq) :
 
 		// tant qu'on n'est pas à la fin de la séquence
 		while(seq[m_longSeq] != '\0') {
-			// On appelle la fonction estValide() pour tester si le nucleotide est valide
-			/*if (! estValide(seq[m_longSeq])) {
-				// avertir qu'il y'a un caractere invalide
-				cout << "[" << intitule << "]" << " invalid char: " << seq[m_longSeq] << " (pos: " << m_longSeq << ")" << endl;
-			}*/
 			m_longSeq++;		// ajoute 1 pour aller au nucleotide suivant
 		}
 
@@ -223,16 +217,13 @@ std::string SeqFastX::decode_rc() {
     return decodageRC ;
 }
 
-string SeqFastX::getSubSeq(size_t posDebut, size_t longSeq) {
+string SeqFastX::getSubSeq(size_t posDebut, size_t longSubSeq) {
 	// rechercher la position du premier nuc
 	string subSeq ;											// la sous séquence
 	unsigned char temp = 0;									// position dans l'encodage
 	size_t encPos ;											// position de début
 	int restd = posDebut % 4 ;								// reste dans l'octet au départ
-	int restf =	( posDebut + longSeq ) % 4 ;				// reste dans l'octet à la fin
-
-	//cout << "Sous-sequence - Depart, longueur: " << posDebut << ", " << longSeq << endl ;
-	//cout << "Sous-sequence - mod dep, mod fin: " << restd << ", " << restf << endl ;
+	int restf =	( posDebut + longSubSeq ) % 4 ;				// reste dans l'octet à la fin
 
 	encPos = posDebut/4 ;
 	temp = encodage[encPos] ;
@@ -242,23 +233,23 @@ string SeqFastX::getSubSeq(size_t posDebut, size_t longSeq) {
         subSeq += decode_char((temp >> 2) & 3);
         subSeq += decode_char((temp >> 0) & 3);
         temp = encodage[++encPos] ;
-        longSeq -= 3 ;
+        longSubSeq -= 3 ;
     }
 
     if (restd == 2)   {
         subSeq += decode_char((temp >> 2) & 3);
         subSeq += decode_char((temp >> 0) & 3);
         temp = encodage[++encPos] ;
-        longSeq -= 2 ;
+        longSubSeq -= 2 ;
     }
 
     if (restd == 3)   {
         subSeq += decode_char((temp >> 0) & 3);
         temp = encodage[++encPos] ;
-        longSeq -= 1 ;
+        longSubSeq -= 1 ;
     }
     
-	for ( size_t i = 0; i<longSeq/4; i++) {
+	for ( size_t i = 0; i<longSubSeq/4; i++) {
 		subSeq += decode_char((temp >> 6) & 3);
 		subSeq += decode_char((temp >> 4) & 3);
 		subSeq += decode_char((temp >> 2) & 3);
@@ -286,7 +277,17 @@ string SeqFastX::getSubSeq(size_t posDebut, size_t longSeq) {
 	return subSeq ;
 }
 
-string SeqFastX::getSubSeqRC(size_t posDebut, size_t longSeq) {
-	string subSeq = "" ;
-	return subSeq ;
+string SeqFastX::getSubSeqRC(string & subSeq) {
+
+    string subSeqRC ;									// sous séquence à retourner
+    size_t lg = subSeq.size() ;							// longueur de la séquence
+
+	for (int i=lg-1; i>=0 ; i--) {
+		if ( subSeq[i] == 'A' || subSeq[i] == 'a' ) subSeqRC += "T" ;
+		if ( subSeq[i] == 'T' || subSeq[i] == 't' ) subSeqRC += "A" ;
+		if ( subSeq[i] == 'C' || subSeq[i] == 'c' ) subSeqRC += "G" ;
+		if ( subSeq[i] == 'G' || subSeq[i] == 'g' ) subSeqRC += "C" ;
+	}
+    return subSeqRC ;
 }
+

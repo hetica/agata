@@ -8,7 +8,7 @@
 extern bool debug ;
 
 class FastxFile {
-	private:
+	protected:
 		std::string fileName ;							// nom du fichier
 		std::string fileType ;							// type de fichier fasta / fastq ( à priori)
 		std::vector<SeqFastX> sequences ;				// tableau des séquences du fichier
@@ -16,14 +16,16 @@ class FastxFile {
 	public:
 		// Constructeurs
 		FastxFile() ;
-		FastxFile(std::string fileName) ;
-		~FastxFile() ;									// Destructeur
+		FastxFile(std::string fileName, std::string fileType) ;
+		virtual ~FastxFile() ;									// Destructeur
 		// Méthodes
-		std::string const getFileName() ;				// nom du fichier
-		void setFileType() ;							// modifier le type du fichier
+		std::string const getFileName() ;				// retourne le nom du fichier
+		//void setFileType() ;							// modifie le type du fichier
 		std::string const getFileType() ;				// type du fichier
- 		void setSequences() ;							// définir les séquences
- 		std::vector<SeqFastX> const getSequences() ;	// aller chercher les séquences
+ 		void setSeqFasta() ;							// définit les séquences fasta
+ 		void setSeqFastq() ;							// définit les séquences fastq
+ 		std::vector<SeqFastX> const getSequences() ;	// retourne instances des séquences
+ 		void printAll() ;								// retourne toutes les infos (pour le débugage)
 };
 
 #endif // fastxfile_h

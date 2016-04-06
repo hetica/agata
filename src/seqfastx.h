@@ -16,10 +16,8 @@ class SeqFastX
 protected:
     // Attributs
 	static int nbSeq ;											// nombre de séquences créés
-	static int nbSeqNoName ;									// nombre de séquences sans nom
 	size_t numSeq ;												// numéro de la séquence
-    std::string m_seqName ;										// nom de la séquence
-    const char* m_sequence ;									// la séquence elle-même
+    std::string m_seqName  ;									// nom de la séquence
     size_t m_longSeq ;											// longueur de la séquence
     unsigned char * encodage;									// tableau de car encodée
     // Méthodes
@@ -43,7 +41,7 @@ public:
 	std::string getSequenceRC() ;								// retourne la séquence Reverse complément
 	static int getNbSeq() ;										// retourne le nombre de séquences
 	std::string getSubSeq(size_t posDebut, size_t longSeq);		// retourne une sous-séquence
-	std::string getSubSeqRC(size_t posDebut, size_t longSeq);	// retourne une sous-séquence Reverse complément
+	std::string getSubSeqRC(std::string & subSeq);				// retourne une sous-séquence Reverse complément
 } ;
 
 std::ostream & operator<<(std::ostream& os, const SeqFastX& s) ;

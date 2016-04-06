@@ -3,15 +3,13 @@
 using namespace std ;
 
 //indique si un fichier est lisible (et donc si il existe)
-bool is_readable( const string &file )            
-{
+bool is_readable( const string &file ) {
   ifstream fichier(file.c_str());
   return !fichier.fail();
 }
 
 // vérifier si le fichier est accessible en écriture
-bool is_writable(const string &file)
-{
+bool is_writable(const string &file) {
     ofstream fichier(file.c_str()) ;
     bool writable = !fichier.fail();
     fichier.close() ;
@@ -19,20 +17,19 @@ bool is_writable(const string &file)
 }
 
 // Gérer les options
-void options(int argc, char** argv, string& refseqfile, string& samfile, vector<string>& fastxfile)
-{
+void options(int argc, char** argv, string& refseqfile, string& samfile, vector<string>& fastxfile) {
 
     // Variables pour parser et gérer les options
 	int c;
     int digit_optind = 0;
     string helpmesg = "Usage : agata [-d|--debug] -i SEQUENCE -o OUTPUT.SAM FILE1 FILE2 FILEn\n"
-                        "		agata -h|--help\n"
-                        "\n Map fasta/fastq files on reference sequence and output a SAM file\n\n"
-                        "		-d	--debug						display all debug messages\n"
-                        "		-i SEQUENCE						sequence's reference\n"
-                        "		-o OUTPUT.SAM					output file, in SAM format\n"
-                        "		-h	--help						show help\n"
-                        "		FILE1 FILE2 FILEn				reads, in FASTA or FASTQ format\n" ;
+                        "	agata -h|--help\n"
+                        "\nMap fasta/fastq files on reference sequence and output a SAM file\n\n"
+                        "  -d   --debug           : display all debug messages\n"
+                        "  -i SEQUENCE            : sequence's reference\n"
+                        "  -o OUTPUT.SAM          : output file, in SAM format\n"
+                        "  -h   --help            : show help\n"
+                        "  FILE1 FILE2 FILEn      : reads, in FASTA or FASTQ format\n" ;
     static struct option long_options[] = {
 		{"help",  no_argument,       0,  'h' },
 		{"debug", no_argument,       0,  'd' }
