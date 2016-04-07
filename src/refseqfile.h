@@ -15,7 +15,7 @@ struct SAcomp {
 
 class RefSeqFile : public FastxFile {
 private:
-	std::vector<size_t> buildSA(const std::string &s) ;			// Construit la SA
+	std::vector<size_t> buildSA(const std::string &s) ;												// Construit la SA
 	std::vector<size_t> buildLCP(const std::string &s, const std::vector<size_t> &SA) ;				// Construit la LCP
 
 public:

@@ -4,8 +4,7 @@
 
 using namespace std ;
 
-/*
-namespace SuffixArray
+/*namespace SuffixArray
 {
 	const size_t MAXN = 1 << 21;
 	string S;

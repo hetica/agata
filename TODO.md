@@ -8,7 +8,6 @@ Bref, tout un tas de trucs qui ne seront sans doute jamais fait
 
 ###			- AMELIORATIONS A APPORTER -
 
-- Récupérer les entêtes de séquence pour les nommer de manière approprié
 - Faire une classe virtual de fastxfile, et trois classes héritées
 	- FastaFile
 	- FastqFile
